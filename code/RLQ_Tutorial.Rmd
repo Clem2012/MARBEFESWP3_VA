@@ -1,0 +1,61 @@
+---
+title: "RLQ Tutorial"
+author: "Clement Garcia, Cefas"
+date: "2025-04-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This document provides an example data and R code for performing **RLQ analysis** (RLQ) and **Fourth Corner**, (4thC) RLQ combines three tables: site x species, site x environment and species x trait in one single ordination and 4thC tests the significance of different elements of the three tables.
+
+For a complete working example, please refer to the [tutorial from Dray et al. (2016)](https://ndownloader.figshare.com/files/5628774) & [Combining the fourth-corner and the RLQ methods for assessing trait responses to environmental variation](https://doi.org/10.6084/m9.figshare.c.3306393.v1)
+
+# 1.Preparation
+## 1.1. Packages and data
+
+he analyses require the R packages `ade4` and `tidyverse`.
+
+```{r prep, echo=T, include = FALSE}
+# Clear memory
+rm(list=ls())
+# Load packages
+library(ade4) ## Perform RLQ & 4thC
+library(tidyverse) ## data formatting and plotting (ggplot2)
+```
+
+If you get an error message, check that the R packages are installed correctly. If not, use the command: `install.packages(c("ade4", "tidyverse"))`.
+The example dataset is available as the Rdata file `NEAtl_FishTraitEnv.Rdata`, available for download [here](https://github.com/rfrelat/TraitEnvironment/raw/main/NEAtl_FishTraitEnv.Rdata).
+
+```{r data}
+load("C:/Users/cg05/OneDrive - CEFAS/Science/Project - EU/MARBEFES/WP3/CVA/MARBEFESWP3_VA/processed_data/BenthicTrait_NL.Rdata")
+```
+- `coord` stations coordinate (lat/lon)
+- `fauna` Species abundance by site (the community matrix)
+- `data.trait` Traits by species
+- `lab.trait` Traits labels and code
+
+```{r inspect}
+# Inspect data tables 
+dim(coord) 
+
+dim(fauna)
+names(fauna)
+
+dim(data.trait)
+names(data.trait)
+
+unique(lab.trait$Trait)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
